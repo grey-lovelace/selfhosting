@@ -22,9 +22,9 @@ services:
     environment:
       - TZ=America/Chicago
     volumes:
-      - ./homeassistant-data:/config
       - /run/dbus:/run/dbus:ro
-      - ./homeassistant-config:/config/custom_configs:ro
+      - /mnt/drive1/homeassistant-data:/config
+      - /mnt/drive1/homeassistant-config:/config/custom_configs:ro
     ports:
       - "8123:8123"
     restart: unless-stopped
@@ -43,7 +43,7 @@ services:
       - WEB_CONCURRENCY=1
       - BASE_URL=https://mealie.${DOMAIN}
     volumes:
-      - ./mealie-data:/app/data/
+      - /mnt/drive1/mealie-data:/app/data/
     ports:
       - "9000:9000"
     restart: unless-stopped
@@ -58,10 +58,10 @@ services:
       - AUDIOBOOKSHELF_GID=100
       - TZ=America/Chicago
     volumes:
-      - ./audiobookshelf-data:/config
-      - ./audiobookshelf-metadata:/metadata
-      - ./audiobookshelf-media/audiobooks:/audiobooks
-      - ./audiobookshelf-media/podcasts:/podcasts
+      - /mnt/drive1/audiobookshelf-data:/config
+      - /mnt/drive1/audiobookshelf-metadata:/metadata
+      - /mnt/drive1/audiobookshelf-media/audiobooks:/audiobooks
+      - /mnt/drive1/audiobookshelf-media/podcasts:/podcasts
     ports:
       - "80:80"
     restart: unless-stopped
