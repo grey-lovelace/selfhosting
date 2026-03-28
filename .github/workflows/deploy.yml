@@ -16,6 +16,8 @@ jobs:
         run: rsync -av --delete ./ /mnt/drive1/selfhosting/
 
       - name: Deploy Docker Stack
+        env:
+          TUNNEL_TOKEN: ${{ secrets.TUNNEL_TOKEN }}
         run: |
           cd /mnt/drive1/selfhosting
           docker compose pull
