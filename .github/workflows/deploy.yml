@@ -1,0 +1,22 @@
+name: Deploy Docker Compose
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Sync to /mnt/drive1
+        run: rsync -av --delete ./ /mnt/drive1/selfhosting/
+
+      - name: Deploy Docker Stack
+        run: |
+          cd /mnt/drive1/selfhosting
+          docker compose pull
+          docker compose up -d --remove-orphans
